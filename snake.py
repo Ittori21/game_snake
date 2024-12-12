@@ -3,9 +3,13 @@ import random
 import logging
 import sys
 
-logging.basicConfig(filename="./loging.log", level=logging.INFO,
-                    format="%(asctime)s - %(message)s")
-WIDTH, HEIGHT = 1000, 800
+logging.basicConfig(
+    filename="./logging.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(message)s",
+    encoding="utf-8"
+)
+WIDTH, HEIGHT = 800, 600
 CELL_SIZE = 20
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
