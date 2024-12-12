@@ -2,6 +2,7 @@ import pygame
 import random
 import logging
 import sys
+
 # ! pip install -r requirements.txt
 logging.basicConfig(
     filename="./logging.log",
@@ -21,10 +22,12 @@ LIGHT_GRAY = (200, 200, 200)
 pygame.init()
 FONT = pygame.font.SysFont("comicsansms", 35)
 
+
 class GameObject:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
 
 class Food(GameObject):
     def __init__(self):
@@ -35,6 +38,7 @@ class Food(GameObject):
 
     def draw(self, screen):
         pygame.draw.rect(screen, GREEN, [self.x, self.y, CELL_SIZE, CELL_SIZE])
+
 
 class Snake(GameObject):
     def __init__(self):
@@ -60,6 +64,7 @@ class Snake(GameObject):
         if self.body[-1] in self.body[:-1]:
             return True
         return False
+
 
 class SnakeGame:
     def __init__(self):
@@ -95,7 +100,7 @@ class SnakeGame:
         self.score = 0
         logging.info("Игра перезапущена")
 
-       def restart_game(self):
+    def restart_game(self):
         self.snake = Snake()
         self.food = Food()
         self.score = 0
@@ -145,7 +150,7 @@ class SnakeGame:
                     if quit_button.collidepoint(event.pos):
                         pygame.quit()
                         sys.exit()
-                        
+
     def run(self):
         logging.info("Игра началась")
         while self.running:
@@ -168,6 +173,7 @@ class SnakeGame:
             self.display_score()
             pygame.display.update()
             self.clock.tick(15)
+
 
 if __name__ == "__main__":
     game = SnakeGame()
