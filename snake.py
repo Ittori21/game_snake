@@ -95,13 +95,27 @@ class SnakeGame:
         self.score = 0
         logging.info("Игра перезапущена")
 
+       def restart_game(self):
+        self.snake = Snake()
+        self.food = Food()
+        self.score = 0
+        logging.info("Игра перезапущена")
+
     def game_over(self):
         self.screen.fill(WHITE)
         msg = FONT.render("Вы проиграли!", True, RED)
         self.screen.blit(msg, [WIDTH // 3, HEIGHT // 4])
 
-        restart_button = pygame.Rect(WIDTH // 3, HEIGHT // 2, 200, 50)
-        quit_button = pygame.Rect(WIDTH // 3 + 250, HEIGHT // 2, 200, 50)
+        button_width = 200
+        button_height = 50
+        button_spacing = 50
+
+        restart_button_x = (WIDTH - 2 * button_width - button_spacing) // 2
+        quit_button_x = restart_button_x + button_width + button_spacing
+        button_y = HEIGHT // 2
+
+        restart_button = pygame.Rect(restart_button_x, button_y, button_width, button_height)
+        quit_button = pygame.Rect(quit_button_x, button_y, button_width, button_height)
 
         pygame.draw.rect(self.screen, LIGHT_GRAY, restart_button)
         pygame.draw.rect(self.screen, LIGHT_GRAY, quit_button)
@@ -109,8 +123,13 @@ class SnakeGame:
         restart_text = FONT.render("Перезапуск", True, BLACK)
         quit_text = FONT.render("Выход", True, BLACK)
 
-        self.screen.blit(restart_text, (restart_button.x + 10, restart_button.y + 10))
-        self.screen.blit(quit_text, (quit_button.x + 10, quit_button.y + 10))
+        restart_text_x = restart_button.x + (button_width - restart_text.get_width()) // 2
+        restart_text_y = restart_button.y + (button_height - restart_text.get_height()) // 2
+        quit_text_x = quit_button.x + (button_width - quit_text.get_width()) // 2
+        quit_text_y = quit_button.y + (button_height - quit_text.get_height()) // 2
+
+        self.screen.blit(restart_text, (restart_text_x, restart_text_y))
+        self.screen.blit(quit_text, (quit_text_x, quit_text_y))
 
         pygame.display.update()
 
@@ -126,7 +145,7 @@ class SnakeGame:
                     if quit_button.collidepoint(event.pos):
                         pygame.quit()
                         sys.exit()
-
+                        
     def run(self):
         logging.info("Игра началась")
         while self.running:
