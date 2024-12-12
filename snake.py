@@ -2,7 +2,7 @@ import pygame
 import random
 import logging
 import sys
-
+# ! pip install -r requirements.txt
 logging.basicConfig(
     filename="./logging.log",
     level=logging.INFO,
